@@ -2,14 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\SeedType;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
@@ -17,9 +16,31 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'demo@greencycle.com'],
+            [
+                'name' => 'Demo',
+                'password' => Hash::make('password1234.'),
+                'coins' => 50,
+            ]
+        );
+
+        SeedType::firstOrCreate(
+            ['name' => 'Pino Común'],
+            [
+                'need_to_level' => 5,
+                'harvest_coins' => 10,
+                'description' => 'Árbol resistente básico',
+            ]
+        );
+
+        SeedType::firstOrCreate(
+            ['name' => 'Roble Dorado'],
+            [
+                'need_to_level' => 3,
+                'harvest_coins' => 7,
+                'description' => 'Crece rápido pero requiere más cuidado',
+            ]
+        );
     }
 }

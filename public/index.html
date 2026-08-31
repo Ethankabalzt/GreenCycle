@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenCycle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ===== VISTA DE AUTENTICACIÓN ===== -->
+    <section id="auth-view" class="auth-view hidden">
+        <div class="card auth-card">
+            <div class="brand">
+                <div class="brand-icon">🌱</div>
+                <h1>GreenCycle</h1>
+                <p>Gestiona tus árboles y cosechas</p>
+            </div>
+
+            <!-- Tabs Login / Registro -->
+            <div class="tabs">
+                <button id="tab-login" class="tab active" type="button">Iniciar sesión</button>
+                <button id="tab-register" class="tab" type="button">Registrarse</button>
+            </div>
+
+            <!-- Formulario de Login -->
+            <form id="login-form" class="auth-form">
+                <div class="field">
+                    <label for="login-email">Correo electrónico</label>
+                    <input id="login-email" type="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+                <div class="field">
+                    <label for="login-password">Contraseña</label>
+                    <input id="login-password" type="password" name="password" placeholder="••••••••" required>
+                </div>
+                <p id="login-error" class="form-error" role="alert"></p>
+                <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+            </form>
+
+            <!-- Formulario de Registro -->
+            <form id="register-form" class="auth-form hidden">
+                <div class="field">
+                    <label for="register-name">Nombre</label>
+                    <input id="register-name" type="text" name="name" placeholder="Tu nombre" required>
+                </div>
+                <div class="field">
+                    <label for="register-email">Correo electrónico</label>
+                    <input id="register-email" type="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+                <div class="field">
+                    <label for="register-password">Contraseña</label>
+                    <input id="register-password" type="password" name="password" placeholder="Mínimo 8 caracteres" minlength="8" required>
+                </div>
+                <p id="register-error" class="form-error" role="alert"></p>
+                <button type="submit" class="btn btn-primary btn-block">Crear cuenta</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== DASHBOARD ===== -->
+    <section id="dashboard-view" class="dashboard-view hidden">
+        <header class="topbar">
+            <div class="brand brand-sm">
+                <div class="brand-icon">🌱</div>
+                <h1>GreenCycle</h1>
+            </div>
+            <div class="topbar-actions">
+                <span id="user-name" class="user-name"></span>
+                <span id="user-coins" class="coins-badge" title="Monedas">🪙 <span id="user-coins-value">0</span></span>
+                <button id="logout-btn" class="btn btn-secondary" type="button">Cerrar sesión</button>
+            </div>
+        </header>
+
+        <main class="dashboard">
+            <!-- Panel de plantación -->
+            <div class="card plant-card">
+                <h2>Plantar un árbol</h2>
+                <div class="plant-row">
+                    <select id="seed-type-select" class="select">
+                        <option value="">Cargando semillas…</option>
+                    </select>
+                    <button id="plant-btn" class="btn btn-primary" type="button" disabled>Plantar árbol 🌳</button>
+                </div>
+                <p id="plant-msg" class="form-message"></p>
+            </div>
+
+            <!-- Cuadrícula de árboles -->
+            <div class="section-header">
+                <h2>Mis árboles (<span id="tree-count">0</span>)</h2>
+                <button id="refresh-btn" class="btn btn-ghost" type="button" title="Actualizar">↻ Actualizar</button>
+            </div>
+            <div id="trees-grid" class="trees-grid"></div>
+        </main>
+
+        <footer class="footer">
+            <p>GreenCycle © 2026 — Simulación de árboles y cosechas</p>
+        </footer>
+    </section>
+
+    <!-- Contenedor de toast para notificaciones -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ===== VISTA NO ENCONTRADA / SERVIDOR ===== -->
+    <!-- Escuchamos eventos del DOM para hidratar el dashboard -->
+
+    <script src="app.js"></script>
+</body>
+</html>
