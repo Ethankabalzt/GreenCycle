@@ -1,0 +1,1086 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GreenCycle</title>
+    <style>
+        :root {
+            --verde-600: #2f9e44;
+            --verde-700: #2b8a3e;
+            --verde-100: #e6f4ea;
+            --marron: #6b4f3a;
+            --texto: #212529;
+            --texto-suave: #6b7280;
+            --borde: #e5e7eb;
+            --fondo: #f4f6f4;
+            --blanco: #ffffff;
+            --rojo: #b42318;
+            --rojo-suave: #fdecea;
+            --azul: #1a56db;
+            --azul-suave: #e8f0fe;
+            --gris: #6b7280;
+            --gris-suave: #f3f4f6;
+            --radio: 12px;
+            --sombra: 0 1px 3px rgba(0, 0, 0, .08), 0 4px 16px rgba(0, 0, 0, .06);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            line-height: 1.5;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        /* ---------- Header ---------- */
+        .site-header {
+            background: var(--verde-700);
+            color: var(--blanco);
+            padding: 14px 20px;
+        }
+
+        .site-header .inner {
+            max-width: 1040px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .site-header h1 {
+            margin: 0;
+            font-size: 1.3rem;
+            letter-spacing: .5px;
+        }
+
+        .site-header .tagline {
+            margin: 0;
+            font-size: .85rem;
+            opacity: .9;
+        }
+
+        /* ---------- Layout de vistas ---------- */
+        .view {
+            max-width: 1040px;
+            margin: 24px auto;
+            padding: 0 16px;
+        }
+
+        .muted {
+            color: var(--texto-suave);
+        }
+
+        /* ---------- Tarjetas y banner ---------- */
+        .card {
+            background: var(--blanco);
+            border: 1px solid var(--borde);
+            border-radius: var(--radio);
+            box-shadow: var(--sombra);
+            padding: 20px;
+        }
+
+        .banner {
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-size: .9rem;
+        }
+
+        .banner.error {
+            background: var(--rojo-suave);
+            border: 1px solid #f5c6c2;
+            color: var(--rojo);
+        }
+
+        .banner.success {
+            background: var(--verde-100);
+            border: 1px solid #c6e9cf;
+            color: var(--verde-700);
+        }
+
+        .banner.info {
+            background: var(--azul-suave);
+            border: 1px solid #c3d9f7;
+            color: var(--azul);
+        }
+
+        /* ---------- Formularios ---------- */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: .85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 9px 11px;
+            border: 1px solid var(--borde);
+            border-radius: 8px;
+            font-size: .95rem;
+            background: var(--blanco);
+            color: var(--texto);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: 2px solid var(--verde-600);
+            outline-offset: -1px;
+            border-color: var(--verde-600);
+        }
+
+        .form-group .hint {
+            font-size: .78rem;
+            color: var(--texto-suave);
+            margin: 4px 0 0;
+        }
+
+        .field-error {
+            display: block;
+            color: var(--rojo);
+            font-size: .8rem;
+            margin-top: 4px;
+            min-height: 1em;
+        }
+
+        /* ---------- Botones ---------- */
+        .btn {
+            cursor: pointer;
+            padding: 10px 16px;
+            font-size: .92rem;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: filter .15s ease, background .15s ease;
+        }
+
+        .btn:hover:not(:disabled) {
+            filter: brightness(.97);
+        }
+
+        .btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: var(--verde-600);
+            color: var(--blanco);
+        }
+
+        .btn-ghost {
+            background: var(--blanco);
+            border-color: var(--borde);
+            color: var(--texto);
+        }
+
+        .btn-ghost:hover:not(:disabled) {
+            background: var(--gris-suave);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* ---------- Vista de autenticación ---------- */
+        .auth-wrap {
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--borde);
+            margin-bottom: 18px;
+        }
+
+        .tab {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 10px 12px;
+            font-size: .92rem;
+            font-weight: 600;
+            color: var(--texto-suave);
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: var(--verde-700);
+            border-bottom-color: var(--verde-600);
+        }
+
+        .demo-hint {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--borde);
+            font-size: .8rem;
+            color: var(--texto-suave);
+        }
+
+        /* ---------- Header del dashboard ---------- */
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .dash-header h2 {
+            margin: 0 0 4px;
+        }
+
+        .dash-header p {
+            margin: 0;
+        }
+
+        .dash-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--texto-suave);
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            border: 3px solid var(--borde);
+            border-top-color: var(--verde-600);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+            vertical-align: -6px;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ---------- Grilla de árboles ---------- */
+        .trees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 16px;
+        }
+
+        .tree-card {
+            background: var(--blanco);
+            border: 1px solid var(--borde);
+            border-radius: var(--radio);
+            box-shadow: var(--sombra);
+            padding: 16px;
+            cursor: pointer;
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+
+        .tree-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .08), 0 10px 24px rgba(0, 0, 0, .1);
+        }
+
+        .tree-card-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tree-card-head strong {
+            font-size: 1.05rem;
+        }
+
+        .badge {
+            font-size: .74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            padding: 3px 9px;
+            border-radius: 999px;
+        }
+
+        .badge.ACTIVE {
+            background: var(--verde-100);
+            color: var(--verde-700);
+        }
+
+        .badge.MATURE {
+            background: var(--azul-suave);
+            color: var(--azul);
+        }
+
+        .badge.HARVESTED {
+            background: var(--gris-suave);
+            color: var(--gris);
+        }
+
+        .badge.DEAD {
+            background: var(--rojo-suave);
+            color: var(--rojo);
+        }
+
+        .tree-stats {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .tree-stats .stat {
+            flex: 1;
+            text-align: center;
+            background: var(--fondo);
+            border-radius: 8px;
+            padding: 8px 4px;
+        }
+
+        .tree-stats .stat span {
+            display: block;
+            font-size: .7rem;
+            color: var(--texto-suave);
+        }
+
+        .tree-stats .stat b {
+            font-size: 1rem;
+        }
+
+        .bar {
+            height: 6px;
+            background: var(--gris-suave);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: .7rem;
+            color: var(--texto-suave);
+            margin-top: 2px;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width .4s ease;
+        }
+
+        .bar-fill.health {
+            background: var(--verde-600);
+        }
+
+        .bar-fill.progress {
+            background: var(--azul);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--texto-suave);
+            border: 2px dashed var(--borde);
+            border-radius: var(--radio);
+            background: var(--blanco);
+        }
+
+        /* ---------- Modales ---------- */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .45);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px 16px;
+            overflow-y: auto;
+            z-index: 50;
+        }
+
+        .modal {
+            background: var(--blanco);
+            border-radius: var(--radio);
+            box-shadow: var(--sombra);
+            width: 100%;
+            max-width: 460px;
+            margin-top: 6vh;
+            padding: 22px;
+            position: relative;
+        }
+
+        .modal h3 {
+            margin: 0 0 16px;
+        }
+
+        .modal .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            border: none;
+            background: var(--gris-suave);
+            color: var(--texto);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.05rem;
+            line-height: 1;
+        }
+
+        /* ---------- Detalle ---------- */
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--gris-suave);
+            font-size: .93rem;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-row .k {
+            color: var(--texto-suave);
+        }
+
+        .detail-row .v {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .detail-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        /* ---------- Pie ---------- */
+        .site-footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--texto-suave);
+            font-size: .8rem;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 560px) {
+            .dash-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .dash-actions .btn {
+                flex: 1;
+            }
+
+            .auth-wrap {
+                padding: 12px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <div>
+                <h1>GreenCycle</h1>
+                <p class="tagline">Tu vivero digital</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== VISTA DE LOGIN / REGISTRO ==================== -->
+    <main id="view-auth" class="view">
+        <div class="auth-wrap">
+            <section class="card auth-card">
+                <div class="tabs" role="tablist" aria-label="Autenticación">
+                    <button id="tab-login" type="button" class="tab active" role="tab">Iniciar sesión</button>
+                    <button id="tab-register" type="button" class="tab" role="tab">Registrarse</button>
+                </div>
+
+                <div id="auth-banner" class="banner" hidden></div>
+
+                <!-- Formulario de login -->
+                <form id="form-login" novalidate>
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input id="login-email" type="email" autocomplete="email" required>
+                        <small class="field-error" data-for="email"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Contraseña</label>
+                        <input id="login-password" type="password" autocomplete="current-password" required>
+                        <small class="field-error" data-for="password"></small>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+                </form>
+
+                <!-- Formulario de registro -->
+                <form id="form-register" hidden novalidate>
+                    <div class="form-group">
+                        <label for="register-name">Nombre</label>
+                        <input id="register-name" type="text" autocomplete="name" required>
+                        <small class="field-error" data-for="name"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input id="register-email" type="email" autocomplete="email" required>
+                        <small class="field-error" data-for="email"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Contraseña</label>
+                        <input id="register-password" type="password" autocomplete="new-password" required>
+                        <small class="field-error" data-for="password"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password-confirm">Confirmar contraseña</label>
+                        <input id="register-password-confirm" type="password" autocomplete="new-password" required>
+                        <small class="field-error" data-for="password_confirmation"></small>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Crear cuenta</button>
+                </form>
+
+                <p class="demo-hint">
+                    Cuenta demo (solo entorno local): demo@greencycle.test / demo1234.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <!-- ==================== DASHBOARD ==================== -->
+    <main id="view-dashboard" class="view" hidden>
+        <header class="dash-header card">
+            <div>
+                <h2>Mi vivero</h2>
+                <p id="dash-user" class="muted">Cargando usuario...</p>
+            </div>
+            <div class="dash-actions">
+                <button id="btn-plant" class="btn btn-primary" type="button">+ Plantar árbol</button>
+                <button id="btn-logout" class="btn btn-ghost" type="button">Cerrar sesión</button>
+            </div>
+        </header>
+
+        <div id="dash-banner" class="banner" hidden></div>
+
+        <p id="trees-loading" class="loading" hidden>
+            <span class="spinner"></span>Cargando...
+        </p>
+
+        <section id="trees-grid" class="trees-grid"></section>
+    </main>
+
+    <!-- ==================== MODAL PLANTAR ==================== -->
+    <div id="modal-plant" class="modal-backdrop" hidden>
+        <div class="modal">
+            <button type="button" class="modal-close" data-close aria-label="Cerrar">&times;</button>
+            <h3>Plantar árbol</h3>
+
+            <div id="plant-banner" class="banner" hidden></div>
+
+            <form id="form-plant" novalidate>
+                <div class="form-group">
+                    <label for="plant-seed">Tipo de semilla</label>
+                    <select id="plant-seed">
+                        <option value="1">Árbol básico (id 1)</option>
+                        <option value="2">Semilla especial (id 2)</option>
+                    </select>
+                    <small class="field-error" data-for="seed_type_id"></small>
+                    <p class="hint">Sprint 1: el catálogo de semillas aún no tiene endpoint; estos son los IDs del seeder.</p>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Plantar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL DETALLE ==================== -->
+    <div id="modal-detail" class="modal-backdrop" hidden>
+        <div class="modal">
+            <button type="button" class="modal-close" data-close aria-label="Cerrar">&times;</button>
+            <h3>Detalle del árbol</h3>
+            <div id="detail-banner" class="banner" hidden></div>
+            <div id="detail-body" class="loading">
+                <span class="spinner"></span>Cargando...
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">GreenCycle - Sprint 1</footer>
+
+    <script>
+        'use strict';
+
+        /* ---------------- Estado ---------------- */
+        const state = {
+            token: localStorage.getItem('greencycle_token') || '',
+        };
+
+        const $ = (sel) => document.querySelector(sel);
+
+        const views = {
+            auth: $('#view-auth'),
+            dashboard: $('#view-dashboard'),
+        };
+
+        const STATUS_LABELS = {
+            ACTIVE: 'Activo',
+            MATURE: 'Maduro',
+            HARVESTED: 'Cosechado',
+            DEAD: 'Muerto',
+        };
+
+        /* ---------------- Helpers de UI ---------------- */
+        function showView(name) {
+            Object.entries(views).forEach(([key, el]) => {
+                el.hidden = key !== name;
+            });
+        }
+
+        function mostrarBanner(el, mensaje, tipo) {
+            el.textContent = mensaje;
+            el.className = 'banner ' + (tipo || 'info');
+            el.hidden = false;
+        }
+
+        function ocultarBanner(el) {
+            el.hidden = true;
+            el.textContent = '';
+        }
+
+        function limpiarErrores(form) {
+            form.querySelectorAll('.field-error').forEach((el) => {
+                el.textContent = '';
+            });
+        }
+
+        function mostrarErrores(form, data) {
+            const errors = (data && data.errors) || {};
+            let hayGenerico = false;
+
+            for (const [campo, mensajes] of Object.entries(errors)) {
+                const el = form.querySelector('[data-for="' + campo + '"]');
+                if (el) {
+                    el.textContent = Array.isArray(mensajes) ? mensajes[0] : mensajes;
+                } else {
+                    hayGenerico = true;
+                }
+            }
+
+            return {
+                generico: hayGenerico,
+                mensaje: (data && data.message) || null,
+            };
+        }
+
+        function formatearFecha(valor) {
+            if (!valor) return '—';
+            const fecha = new Date(valor);
+            if (isNaN(fecha.getTime())) return valor;
+            return fecha.toLocaleString('es-AR', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+            });
+        }
+
+        function tituloEstado(status) {
+            return STATUS_LABELS[status] || status;
+        }
+
+        function badgeHtml(status) {
+            const clase = ['ACTIVE', 'MATURE', 'HARVESTED', 'DEAD'].includes(status) ? status : 'HARVESTED';
+            return '<span class="badge ' + clase + '">' + tituloEstado(status) + '</span>';
+        }
+
+        function barraHtml(label, valor, clase) {
+            const v = Math.max(0, Math.min(100, Number(valor) || 0));
+            return (
+                '<div class="bar"><div class="bar-fill ' + clase + '" style="width:' + v + '%"></div></div>' +
+                '<div class="bar-label"><span>' + label + '</span><span>' + v + ' / 100</span></div>'
+            );
+        }
+
+        /* ---------------- API ---------------- */
+        function irAlLogin(mensaje) {
+            state.token = '';
+            localStorage.removeItem('greencycle_token');
+            showView('auth');
+            if (mensaje) {
+                mostrarBanner($('#auth-banner'), mensaje, 'error');
+            }
+        }
+
+        async function api(path, options) {
+            const opts = options || {};
+            const headers = {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            };
+
+            if (state.token) {
+                headers.Authorization = 'Bearer ' + state.token;
+            }
+
+            let res;
+            try {
+                res = await fetch(path, {
+                    method: opts.method || 'GET',
+                    headers: headers,
+                    body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
+                });
+            } catch (err) {
+                return { ok: false, status: 0, data: null, networkError: true };
+            }
+
+            const data = res.status === 204 ? null : await res.json().catch(() => null);
+
+            const esAuth = path === '/api/auth/login' || path === '/api/auth/register';
+
+            if (res.status === 401 && !esAuth && state.token) {
+                irAlLogin('Tu sesión expiró o el token no es válido. Vuelve a iniciar sesión.');
+            }
+
+            return { ok: res.ok, status: res.status, data: data };
+        }
+
+        /* ---------------- Autenticacion ---------------- */
+        function activarPestana(que) {
+            $('#tab-login').classList.toggle('active', que === 'login');
+            $('#tab-register').classList.toggle('active', que === 'register');
+            $('#form-login').hidden = que !== 'login';
+            $('#form-register').hidden = que !== 'register';
+            ocultarBanner($('#auth-banner'));
+        }
+
+        async function manejarLogin(e) {
+            e.preventDefault();
+
+            const form = e.currentTarget;
+            const btn = form.querySelector('button[type="submit"]');
+            const banner = $('#auth-banner');
+
+            ocultarBanner(banner);
+            limpiarErrores(form);
+            btn.disabled = true;
+
+            try {
+                const res = await api('/api/auth/login', {
+                    method: 'POST',
+                    body: {
+                        email: $('#login-email').value.trim(),
+                        password: $('#login-password').value,
+                    },
+                });
+
+                if (res.ok) {
+                    state.token = res.data.token;
+                    localStorage.setItem('greencycle_token', res.data.token);
+                    form.reset();
+                    entrarDashboard();
+                } else {
+                    const info = mostrarErrores(form, res.data);
+                    mostrarBanner(banner, info.mensaje || 'No se pudo iniciar sesión.', 'error');
+                }
+            } catch (err) {
+                mostrarBanner(banner, 'Error de red. Intenta de nuevo.', 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function manejarRegistro(e) {
+            e.preventDefault();
+
+            const form = e.currentTarget;
+            const btn = form.querySelector('button[type="submit"]');
+            const banner = $('#auth-banner');
+
+            ocultarBanner(banner);
+            limpiarErrores(form);
+            btn.disabled = true;
+
+            try {
+                const res = await api('/api/auth/register', {
+                    method: 'POST',
+                    body: {
+                        name: $('#register-name').value.trim(),
+                        email: $('#register-email').value.trim(),
+                        password: $('#register-password').value,
+                        password_confirmation: $('#register-password-confirm').value,
+                    },
+                });
+
+                if (res.ok) {
+                    state.token = res.data.token;
+                    localStorage.setItem('greencycle_token', res.data.token);
+                    form.reset();
+                    entrarDashboard();
+                } else {
+                    const info = mostrarErrores(form, res.data);
+                    mostrarBanner(banner, info.mensaje || 'No se pudo crear la cuenta.', 'error');
+                }
+            } catch (err) {
+                mostrarBanner(banner, 'Error de red. Intenta de nuevo.', 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        /* ---------------- Dashboard ---------------- */
+        async function cargarUsuario() {
+            const res = await api('/api/user');
+            if (res.ok && res.data) {
+                const u = res.data;
+                $('#dash-user').textContent = u.name + ' · ' + u.email + (typeof u.coins === 'number' ? (' · ' + u.coins + ' monedas') : '');
+            } else {
+                $('#dash-user').textContent = 'No se pudo cargar el usuario.';
+            }
+        }
+
+        async function cargarArboles() {
+            const grid = $('#trees-grid');
+            const loading = $('#trees-loading');
+            const banner = $('#dash-banner');
+
+            ocultarBanner(banner);
+            grid.innerHTML = '';
+            loading.hidden = false;
+
+            const res = await api('/api/trees');
+
+            loading.hidden = true;
+
+            if (!res.ok) {
+                if (res.status === 401) return;
+                mostrarBanner(banner, (res.data && res.data.message) || 'No se pudieron cargar los árboles.', 'error');
+                grid.innerHTML = '';
+                return;
+            }
+
+            const arboles = Array.isArray(res.data) ? res.data : [];
+
+            if (arboles.length === 0) {
+                grid.innerHTML = '<div class="empty-state">Aún no posees árboles plantados</div>';
+                return;
+            }
+
+            grid.innerHTML = arboles.map(cardHtml).join('');
+        }
+
+        function cardHtml(a) {
+            return (
+                '<article class="tree-card" data-tree-id="' + a.id + '" tabindex="0" role="button" aria-label="Ver detalle del árbol ' + a.id + '">' +
+                    '<div class="tree-card-head">' +
+                        '<strong>Árbol #' + a.id + '</strong>' +
+                        badgeHtml(a.status) +
+                    '</div>' +
+                    '<div class="tree-stats">' +
+                        '<div class="stat"><span>Nivel</span><b>' + (a.level ?? '—') + '</b></div>' +
+                        '<div class="stat"><span>Salud</span><b>' + (a.health ?? '—') + '</b></div>' +
+                        '<div class="stat"><span>Progreso</span><b>' + (a.progress ?? '—') + '%</b></div>' +
+                    '</div>' +
+                    barraHtml('Salud', a.health, 'health') +
+                    barraHtml('Progreso', a.progress, 'progress') +
+                '</article>'
+            );
+        }
+
+        function entrarDashboard() {
+            showView('dashboard');
+            cargarUsuario();
+            cargarArboles();
+        }
+
+        async function cerrarSesion() {
+            const token = state.token;
+            state.token = '';
+            localStorage.removeItem('greencycle_token');
+
+            if (token) {
+                await api('/api/auth/logout', { method: 'POST' });
+            }
+
+            showView('auth');
+            mostrarBanner($('#auth-banner'), 'Sesión cerrada correctamente.', 'success');
+        }
+
+        /* ---------------- Plantar ---------------- */
+        function abrirModalPlantar() {
+            const form = $('#form-plant');
+            form.reset();
+            limpiarErrores(form);
+            ocultarBanner($('#plant-banner'));
+            $('#modal-plant').hidden = false;
+        }
+
+        $('#form-plant').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const form = e.currentTarget;
+            const btn = form.querySelector('button[type="submit"]');
+            const banner = $('#plant-banner');
+
+            ocultarBanner(banner);
+            limpiarErrores(form);
+            btn.disabled = true;
+
+            try {
+                const res = await api('/api/trees', {
+                    method: 'POST',
+                    body: { seed_type_id: Number($('#plant-seed').value) },
+                });
+
+                if (res.ok) {
+                    $('#modal-plant').hidden = true;
+                    mostrarBanner($('#dash-banner'), 'Árbol plantado con éxito.', 'success');
+                    cargarArboles();
+                } else if (res.status === 422 && res.data) {
+                    const info = mostrarErrores(form, res.data);
+                    if (info.mensaje) {
+                        mostrarBanner(banner, info.mensaje, 'error');
+                    }
+                } else {
+                    mostrarBanner(banner, (res.data && res.data.message) || 'No se pudo plantar el árbol.', 'error');
+                }
+            } catch (err) {
+                mostrarBanner(banner, 'Error de red. Intenta de nuevo.', 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        });
+
+        /* ---------------- Detalle ---------------- */
+        async function abrirDetalle(id) {
+            const body = $('#detail-body');
+            const banner = $('#detail-banner');
+
+            $('#modal-detail').hidden = false;
+            ocultarBanner(banner);
+            body.className = 'loading';
+            body.innerHTML = '<span class="spinner"></span>Cargando...';
+
+            const res = await api('/api/trees/' + id);
+
+            if (!res.ok) {
+                if (res.status === 401) {
+                    $('#modal-detail').hidden = true;
+                    return;
+                }
+                body.className = '';
+                body.innerHTML = '';
+                const msg = res.status === 403
+                    ? 'No tienes permiso para ver este árbol.'
+                    : res.status === 404
+                        ? 'El árbol no existe.'
+                        : res.networkError
+                            ? 'Error de red. Intenta de nuevo.'
+                            : (res.data && res.data.message) || 'No se pudo cargar el árbol.';
+                mostrarBanner(banner, msg, 'error');
+                return;
+            }
+
+            body.className = '';
+            body.innerHTML = detalleHtml(res.data);
+        }
+
+        function detalleHtml(a) {
+            return (
+                '<div class="detail-head">' +
+                    '<strong>Árbol #' + a.id + '</strong>' +
+                    badgeHtml(a.status) +
+                '</div>' +
+                '<div class="detail-row"><span class="k">Nivel</span><span class="v">' + (a.level ?? '—') + '</span></div>' +
+                '<div class="detail-row"><span class="k">Salud</span><span class="v">' + (a.health ?? '—') + '</span></div>' +
+                '<div class="detail-row"><span class="k">Progreso</span><span class="v">' + (a.progress ?? '—') + '%</span></div>' +
+                barraHtml('Salud', a.health, 'health') +
+                barraHtml('Progreso', a.progress, 'progress') +
+                '<div class="detail-row"><span class="k">Estado</span><span class="v">' + tituloEstado(a.status) + '</span></div>' +
+                '<div class="detail-row"><span class="k">Tipo de semilla</span><span class="v">' + (a.seed_type_id ?? '—') + '</span></div>' +
+                '<div class="detail-row"><span class="k">Plantado</span><span class="v">' + formatearFecha(a.planted_at) + '</span></div>' +
+                '<div class="detail-row"><span class="k">Último cuidado</span><span class="v">' + formatearFecha(a.last_cared_at) + '</span></div>' +
+                '<div class="detail-row"><span class="k">Próximo cuidado</span><span class="v">' + formatearFecha(a.next_care_at) + '</span></div>'
+            );
+        }
+
+        /* ---------------- Cierre de modales ---------------- */
+        document.querySelectorAll('.modal-backdrop').forEach((backdrop) => {
+            backdrop.addEventListener('click', (e) => {
+                if (e.target === backdrop || e.target.closest('[data-close]')) {
+                    backdrop.hidden = true;
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-backdrop').forEach((el) => {
+                    el.hidden = true;
+                });
+            }
+        });
+
+        /* ---------------- Eventos de vista ---------------- */
+        $('#tab-login').addEventListener('click', () => activarPestana('login'));
+        $('#tab-register').addEventListener('click', () => activarPestana('register'));
+
+        $('#btn-logout').addEventListener('click', cerrarSesion);
+        $('#btn-plant').addEventListener('click', abrirModalPlantar);
+
+        $('#trees-grid').addEventListener('click', (e) => {
+            const tarjeta = e.target.closest('[data-tree-id]');
+            if (tarjeta) abrirDetalle(tarjeta.dataset.treeId);
+        });
+
+        $('#trees-grid').addEventListener('keydown', (e) => {
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.dataset && e.target.dataset.treeId) {
+                e.preventDefault();
+                abrirDetalle(e.target.dataset.treeId);
+            }
+        });
+
+        /* ---------------- Arranque ---------------- */
+        $('#form-login').addEventListener('submit', manejarLogin);
+        $('#form-register').addEventListener('submit', manejarRegistro);
+
+        if (state.token) {
+            entrarDashboard();
+        } else {
+            showView('auth');
+        }
+    </script>
+</body>
+</html>

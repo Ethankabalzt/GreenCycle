@@ -16,10 +16,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+        $this->call([SeedTypeSeeder::class]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Usuario de prueba documentado en el README (solo en local)
+        if (app()->environment('local')) {
+            User::factory()->create([
+                'name' => 'demo',
+                'email' => 'demo@greencycle.test',
+                'password' => 'demo1234.',
+            ]);
+        }
     }
 }
