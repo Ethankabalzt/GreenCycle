@@ -157,8 +157,6 @@ http://greencycle.test/
 
 ## Diagrama entidad-relación
 
-## Diagrama entidad-relación
-
 ```mermaid
 erDiagram
     USERS ||--o{ TREES : "posee"
