@@ -270,9 +270,10 @@ fechas u otros valores internos: esos los calcula y devuelve el servidor.
  
 | Método | Endpoint | Descripción | Auth |
 |---|---|---|---|
-| POST | /register | Registrar usuario | No |
-| POST | /login | Iniciar sesión | No |
-| POST | /logout | Cerrar sesión | Sí |
+| POST | /api/auth/register | Registrar usuario | No |
+| POST | /api/auth/login | Iniciar sesión | No |
+| POST | /api/auth/logout | Cerrar sesión | Sí |
+| GET | /api/user | Consultar usuario autenticado | Sí |
 | GET | /api/trees | Listar árboles del usuario autenticado | Sí |
 | GET | /api/trees/{tree} | Consultar detalle de un árbol propio | Sí |
 | POST | /api/trees | Plantar un árbol (indicando tipo de semilla) | Sí |
