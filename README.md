@@ -157,6 +157,8 @@ http://greencycle.test/
 
 ## Diagrama entidad-relación
 
+## Diagrama entidad-relación
+
 ```mermaid
 erDiagram
     USERS ||--o{ TREES : "posee"
@@ -221,9 +223,7 @@ erDiagram
         bigint tree_id FK
         datetime expires_at
     }
-\```
 ```
-
 ---
  
 ## Modelo de datos
