@@ -154,6 +154,77 @@ http://greencycle.test/
 
  
 ---
+
+## Diagrama entidad-relación
+
+```mermaid
+erDiagram
+    USERS ||--o{ TREES : "posee"
+    SEED_TYPES ||--o{ TREES : "define tipo"
+    USERS ||--o{ INVENTORIES : "tiene"
+    ITEMS ||--o{ INVENTORIES : "aparece en"
+    USERS ||--o{ PURCHASES : "compra"
+    ITEMS ||--o{ PURCHASES : "comprado en"
+    USERS ||--o{ ACTIVE_EFFECTS : "activa"
+    ITEMS ||--o{ ACTIVE_EFFECTS : "genera"
+    TREES ||--o{ ACTIVE_EFFECTS : "recibe"
+
+    USERS {
+        bigint id PK
+        string name
+        string email
+        string password
+        int coins
+    }
+    SEED_TYPES {
+        bigint id PK
+        string name
+        tinyint cuidados_por_nivel
+        int monedas_cosecha
+    }
+    TREES {
+        bigint id PK
+        bigint user_id FK
+        bigint seed_type_id FK
+        tinyint nivel
+        tinyint salud
+        tinyint progreso
+        string estado
+        datetime last_cared_at
+        datetime next_care_at
+        datetime last_decay_at
+        datetime harvested_at
+    }
+    ITEMS {
+        bigint id PK
+        string name
+        int cost
+        string effect_type
+        int duration_minutes
+    }
+    INVENTORIES {
+        bigint id PK
+        bigint user_id FK
+        bigint item_id FK
+        int quantity
+    }
+    PURCHASES {
+        bigint id PK
+        bigint user_id FK
+        bigint item_id FK
+        int price_paid
+    }
+    ACTIVE_EFFECTS {
+        bigint id PK
+        bigint user_id FK
+        bigint item_id FK
+        bigint tree_id FK
+        datetime expires_at
+    }
+\```
+```
+
+---
  
 ## Modelo de datos
  
@@ -179,17 +250,17 @@ las relaciones y los seeders. Las reglas temporales (cuidado, cooldown,
 deterioro), la economía y el inventario se desarrollarán en sprints
 posteriores.
  
-- [ ] Registro de usuarios.
-- [ ] Inicio y cierre de sesión mediante Laravel Sanctum.
-- [ ] Rutas y endpoints privados protegidos.
-- [ ] Modelo de datos inicial (usuarios, árboles, tipos de semilla).
-- [ ] Migraciones y seeders reproducibles.
-- [ ] Autorización por propiedad (cada usuario solo ve/modifica sus árboles).
-- [ ] Creación de árboles (POST /api/trees).
-- [ ] Consulta del listado de árboles propios.
-- [ ] Consulta del detalle de un árbol propio.
-- [ ] Dashboard inicial (registro/login, plantar y visualizar árboles).
-- [ ] Integración Frontend-Backend mediante Fetch API, con estados de carga,
+- [x] Registro de usuarios.
+- [x] Inicio y cierre de sesión mediante Laravel Sanctum.
+- [x] Rutas y endpoints privados protegidos.
+- [x] Modelo de datos inicial (usuarios, árboles, tipos de semilla).
+- [x] Migraciones y seeders reproducibles.
+- [x] Autorización por propiedad (cada usuario solo ve/modifica sus árboles).
+- [x] Creación de árboles (POST /api/trees).
+- [x] Consulta del listado de árboles propios.
+- [x] Consulta del detalle de un árbol propio.
+- [x] Dashboard inicial (registro/login, plantar y visualizar árboles).
+- [x] Integración Frontend-Backend mediante Fetch API, con estados de carga,
       éxito, error y vacío, sin recargas completas de página.
 ---
  
