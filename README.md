@@ -304,7 +304,8 @@ git status
 
 *Uso de IA y recursos externos*
  
-
+Se usa para la revisión y corrección del código además de ofrecer orientación para 
+llegar a la solución del problema
  
 ---
  
