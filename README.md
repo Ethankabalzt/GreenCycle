@@ -159,67 +159,91 @@ http://greencycle.test/
 
 ```mermaid
 erDiagram
-    USERS ||--o{ TREES : "posee"
-    SEED_TYPES ||--o{ TREES : "define tipo"
-    USERS ||--o{ INVENTORIES : "tiene"
-    ITEMS ||--o{ INVENTORIES : "aparece en"
-    USERS ||--o{ PURCHASES : "compra"
-    ITEMS ||--o{ PURCHASES : "comprado en"
-    USERS ||--o{ ACTIVE_EFFECTS : "activa"
-    ITEMS ||--o{ ACTIVE_EFFECTS : "genera"
-    TREES ||--o{ ACTIVE_EFFECTS : "recibe"
+    users ||--o{ trees : "planta"
+    users ||--o{ inventory_items : "posee"
+    users ||--o{ purchases : "realiza"
+    seed_types ||--o{ trees : "define"
+    trees ||--o{ cares : "recibe"
+    trees ||--o{ active_effects : "tiene"
+    shop_items ||--o{ inventory_items : "se almacena en"
+    shop_items ||--o{ purchases : "se compra en"
+    shop_items ||--o{ active_effects : "aplica"
+    purchases ||--o{ active_effects : "activa"
 
-    USERS {
+    users {
         bigint id PK
-        string name
-        string email
-        string password
-        int coins
+        varchar(100) name "NN"
+        varchar(150) email UK "NN"
+        varchar(255) password "NN"
+        integer coins "NN"
+        timestamp created_at
+        timestamp updated_at
     }
-    SEED_TYPES {
+
+    seed_types {
         bigint id PK
-        string name
-        tinyint cuidados_por_nivel
-        int monedas_cosecha
+        varchar(100) name UK "NN"
+        integer cares_by_level "NN"
+        integer harvest_coins "NN"
+        text description
     }
-    TREES {
+
+    trees {
         bigint id PK
-        bigint user_id FK
-        bigint seed_type_id FK
-        tinyint nivel
-        tinyint salud
-        tinyint progreso
-        string estado
-        datetime last_cared_at
-        datetime next_care_at
-        datetime last_decay_at
-        datetime harvested_at
+        bigint user_id FK "NN"
+        bigint seed_type_id FK "NN"
+        integer level "NN"
+        integer health "NN"
+        integer progress "NN"
+        varchar(20) status "NN"
+        timestamp planted_at "NN"
+        timestamp last_cared_at
+        timestamp last_decay_at
+        timestamp next_care_at
+        timestamp harvested_at
+        timestamp created_at
+        timestamp updated_at
     }
-    ITEMS {
+
+    cares {
         bigint id PK
-        string name
-        int cost
-        string effect_type
-        int duration_minutes
+        bigint tree_id FK "NN"
+        varchar(30) type "NN"
+        timestamp cared_at "NN"
     }
-    INVENTORIES {
+
+    shop_items {
         bigint id PK
-        bigint user_id FK
-        bigint item_id FK
-        int quantity
+        varchar(100) name "NN"
+        varchar(30) type "NN"
+        integer cost "NN"
+        integer effect_duration_min
+        text description
     }
-    PURCHASES {
+
+    inventory_items {
         bigint id PK
-        bigint user_id FK
-        bigint item_id FK
-        int price_paid
+        bigint user_id FK "NN"
+        bigint shop_item_id FK "NN"
+        integer quantity "NN"
     }
-    ACTIVE_EFFECTS {
+
+    purchases {
         bigint id PK
-        bigint user_id FK
-        bigint item_id FK
-        bigint tree_id FK
-        datetime expires_at
+        bigint user_id FK "NN"
+        bigint shop_item_id FK "NN"
+        integer quantity "NN"
+        integer total_cost "NN"
+        timestamp purchased_at "NN"
+    }
+
+    active_effects {
+        bigint id PK
+        bigint tree_id FK "NN"
+        bigint shop_item_id FK "NN"
+        timestamp activated_at "NN"
+        timestamp expires_at FK "NN"
+        tinyint active_flag
     }
 ```
 ---
