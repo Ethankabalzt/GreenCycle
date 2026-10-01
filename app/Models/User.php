@@ -31,4 +31,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tree::class);
     }
+
+    public function inventoryItems()
+    {
+        return $this->hasMany(InventoryItem::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
 }

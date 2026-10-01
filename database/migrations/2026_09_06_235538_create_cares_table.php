@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('cares', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tree_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('action'); // WATER, FERTILIZE, PRUNE, ACCELERATE
+            $table->unsignedTinyInteger('progress_gained')->default(0);
+            $table->string('note')->nullable();
+            $table->timestamp('performed_at')->useCurrent();
             $table->timestamps();
+
+            $table->index(['tree_id', 'performed_at']);
         });
     }
 

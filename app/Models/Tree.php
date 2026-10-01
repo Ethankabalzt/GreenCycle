@@ -15,6 +15,16 @@ class Tree extends Model
 
     public const HARVESTED = 'HARVESTED';
 
+    /**
+     * Cada cuántos horas el scheduler aplica el deterioro a un árbol sin cuidado.
+     */
+    public const DECAY_INTERVAL_HOURS = 6;
+
+    /**
+     * Salud que pierde un árbol por cada intervalo de deterioro aplicado.
+     */
+    public const DECAY_DAMAGE = 20;
+
     protected $fillable = [
         'user_id',
         'seed_type_id',
@@ -24,6 +34,8 @@ class Tree extends Model
         'status',
         'last_cared_at',
         'next_care_at',
+        'last_decay_at',
+        'next_decay_at',
         'harvested_at',
         'planted_at',
     ];
@@ -33,7 +45,10 @@ class Tree extends Model
         return [
             'last_cared_at' => 'datetime',
             'next_care_at' => 'datetime',
+            'last_decay_at' => 'datetime',
+            'next_decay_at' => 'datetime',
             'harvested_at' => 'datetime',
+            'planted_at' => 'datetime',
         ];
     }
 
@@ -45,5 +60,15 @@ class Tree extends Model
     public function seedType()
     {
         return $this->belongsTo(SeedType::class);
+    }
+
+    public function cares()
+    {
+        return $this->hasMany(Care::class);
+    }
+
+    public function activeEffects()
+    {
+        return $this->hasMany(ActiveEffect::class);
     }
 }

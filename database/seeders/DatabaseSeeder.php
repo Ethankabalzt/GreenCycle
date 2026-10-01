@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        $this->call([SeedTypeSeeder::class]);
+        $this->call([SeedTypeSeeder::class, ShopItemSeeder::class]);
 
         // Usuario de prueba documentado en el README (solo en local)
         if (app()->environment('local')) {

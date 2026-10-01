@@ -20,7 +20,7 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        $token = $user->createToken('api')->plainTextToken;
+        $token = $user->createToken('greencycle')->plainTextToken;
 
         return response()->json(['token' => $token], 201);
     }
@@ -35,7 +35,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Credenciales inválidas'], 401);
         }
 
-        $token = $user->createToken('api')->plainTextToken;
+        $token = $user->createToken('greencycle')->plainTextToken;
 
         return response()->json(['token' => $token], 200);
     }

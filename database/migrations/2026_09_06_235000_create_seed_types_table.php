@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('seed_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedTinyInteger('cuidados_por_nivel')->default(5);
-            $table->unsignedInteger('monedas_cosecha')->default(10);
+            $table->unsignedTinyInteger('cares_by_level')->default(5);
+            $table->unsignedInteger('harvest_coins')->default(10);
             $table->timestamps();
         });
     }

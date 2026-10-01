@@ -15,18 +15,19 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('seed_type_id')->constrained();
-
             $table->unsignedTinyInteger('level')->default(0);
             $table->unsignedTinyInteger('health')->default(100);
             $table->unsignedTinyInteger('progress')->default(0);
-            $table->string('status')->default('ACTIVE'); // ACTIVE, MATURE, HARVESTED, DEAD
-
+            $table->string('status')->default('ACTIVE'); // ACTIVE, MATURE, DEAD, HARVESTED
             $table->timestamp('planted_at')->useCurrent();
             $table->timestamp('last_cared_at')->nullable();
             $table->timestamp('next_care_at')->nullable();
+            $table->timestamp('last_decay_at')->nullable();
+            $table->timestamp('next_decay_at')->nullable();
             $table->timestamp('harvested_at')->nullable();
             $table->timestamps();
             $table->index(['user_id', 'status']);
+            $table->index(['status', 'next_decay_at']);
         });
     }
 

@@ -28,8 +28,9 @@ class TreeController extends Controller
             'level' => 0,
             'health' => 100,
             'progress' => 0,
-            'status' => 'ACTIVE',
+            'status' => Tree::ACTIVE,
             'planted_at' => now(),
+            'next_decay_at' => now()->addHours(Tree::DECAY_INTERVAL_HOURS),
         ]);
 
         return response()->json($tree, 201);

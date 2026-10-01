@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class SeedType extends Model
 {
-    //
-    protected $fillable = ['name', 'cuidados_por_nivel', 'monedas_cosecha'];
+    protected $fillable = [
+        'name',
+        'cares_by_level',
+        'harvest_coins',
+    ];
 
     public function trees()
     {

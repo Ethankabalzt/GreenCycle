@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('shop_item_id')->constrained();
+            $table->unsignedInteger('quantity')->default(1);
+            $table->unsignedInteger('coins_spent')->default(0);
+            $table->timestamp('purchased_at')->useCurrent();
             $table->timestamps();
+
+            $table->index(['user_id', 'purchased_at']);
         });
     }
 

@@ -12,17 +12,16 @@ class SeedTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         SeedType::create([
             'name' => 'Árbol básico',
-            'cuidados_por_nivel' => 5,
-            'monedas_cosecha' => 10,
+            'cares_by_level' => 5,
+            'harvest_coins' => 10,
         ]);
 
         SeedType::create([
             'name' => 'Semilla especial',
-            'cuidados_por_nivel' => 3,
-            'monedas_cosecha' => 7,
+            'cares_by_level' => 3,
+            'harvest_coins' => 7,
         ]);
     }
 }

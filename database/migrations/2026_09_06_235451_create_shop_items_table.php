@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('shop_items', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('effect_type'); // ACCELERATOR, FERTILIZER, PROTECTOR
+            $table->unsignedInteger('cost');
+            $table->unsignedInteger('effect_duration_min')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
