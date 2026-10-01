@@ -246,6 +246,9 @@ erDiagram
         tinyint active_flag
     }
 ```
+
+<img width="2745" height="1128" alt="diagrama sprint1 def" src="https://github.com/user-attachments/assets/7f06f091-82c2-4240-a112-de5d7cb424a5" />
+
 ---
  
 ## Modelo de datos
