@@ -7,6 +7,7 @@ use App\Models\Tree;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Resources\TreeCareResource;
 
 class TreeCareController extends Controller
 {
@@ -56,17 +57,10 @@ class TreeCareController extends Controller
             'cared_at' => $now,
         ]);
 
-        return response()->json([
-            'message' => 'Cuidado aplicado con éxito',
-            'tree'    => [
-            'id'           => $tree->id,
-            'level'        => $tree->level,
-            'health'       => $tree->health,
-            'progress'     => $tree->progress,
-            'status'       => $tree->status,
-            'next_care_at' => $tree->next_care_at->utc()->toIso8601ZuluString(),
-            ],
-        ]);
+    return response()->json([
+    'message' => 'Cuidado aplicado con éxito',
+    'tree'    => (new TreeCareResource($tree))->resolve(),
+    ], 200);
     });
     }
 }

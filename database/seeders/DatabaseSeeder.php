@@ -2,24 +2,29 @@
 
 namespace Database\Seeders;
 
+use App\Models\SeedType;
+use App\Models\Tree;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            SeedTypeSeeder::class,
         ]);
+
+        $user = User::firstOrCreate(
+            ['email' => 'demo@greencycle.test'],
+            ['name' => 'Demo', 'password' => 'demo1234.']
+        );
+
+        if ($user->trees()->count() === 0) {
+            Tree::create([
+                'user_id' => $user->id,
+                'seed_type_id' => SeedType::first()->id,
+            ]);
+        }
     }
 }
