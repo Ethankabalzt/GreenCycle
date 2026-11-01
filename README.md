@@ -183,10 +183,7 @@ misma hora simulada produce un solo deterioro.
 
 ## DER (diagrama entidad-relación)
 
-El diagrama completo, con entidades, cardinalidades, llaves foráneas y
-restricciones, está en [`docs/der.md`](docs/der.md) (Mermaid, se renderiza
-directamente en GitHub) y en [`docs/der.dbml`](docs/der.dbml) para
-dbdiagram.io. Ambos se mantienen en sincronía con las migraciones.
+<img width="2745" height="1128" alt="diagrama sprint1 def" src="https://github.com/user-attachments/assets/86f8d840-2359-43bf-a522-f9523f8c4bb6" />
 
 ---
 <<<<<<< Sprint-2
