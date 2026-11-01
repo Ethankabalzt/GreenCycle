@@ -9,9 +9,7 @@ crecimiento y deterioro según el tiempo transcurrido: un árbol con salud 0
 muere y ya no puede recibir cuidados; un árbol que alcanza el nivel máximo
 puede cosecharse para obtener monedas e invertirlas en ítems de la tienda.
  
-Este README documenta el estado del proyecto durante el *Sprint 1*:
-autenticación de usuarios, modelo de datos, API inicial de árboles e
-interfaz base.
+Este README documenta el estado del proyecto durante el *Sprint 1* y *Sprint 2*:
  
 ---
  
