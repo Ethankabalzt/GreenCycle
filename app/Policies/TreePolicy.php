@@ -8,6 +8,11 @@ use Illuminate\Auth\Access\Response;
 
 class TreePolicy
 {
+    public function view(User $user, Tree $tree): bool
+    {
+        return $user->id === $tree->user_id;
+    }
+
     public function care(User $user, Tree $tree): bool
     {
         return $user->id === $tree->user_id;
